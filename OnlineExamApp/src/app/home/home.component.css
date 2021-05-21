@@ -1,0 +1,18 @@
+.home {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+}
+
+.app-question-numbers {
+	background-color: #AFB6BA;
+	padding-right: 0;
+	width: 20%;
+	height: 100vh;
+}
+
+.app-question-panel {
+	background-color: #C8D0D5;
+	width: 80%;
+	padding-left: 0;
+}

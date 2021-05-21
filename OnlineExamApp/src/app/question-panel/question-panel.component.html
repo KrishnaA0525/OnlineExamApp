@@ -1,0 +1,53 @@
+<div *ngIf="!questionLoaded" class="loadingio-spinner-spinner-u9nkw0e5k0k">
+    <div class="ldio-meg98xc3gyn">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div *ngIf="questionLoaded">
+    <div class="question-panel">
+        <!-- Question -->
+        <div class="question-qa-panel">
+            <div [@questionTrigger]>{{question.num}}. {{question.question}}</div>
+
+            <!-- Options -->
+            <div *ngIf="question && question.options">
+                <div *ngIf="question.inputType === 'text'" [@optionTrigger]>
+                    <input type="text" [(ngModel)]="question.options[0].answer" name="name" (blur)="updateAnswer('text', question.id, 0, question.options[0].answer)"/>
+                </div>
+                <div *ngIf="question.inputType !== 'text'">
+                    <ol>
+                        <li *ngFor="let option of question.options; let i = index" [@optionTrigger]>
+                            <input [type]="question.inputType" class="hand-cursor" name="name" [checked]="option.isSelected"> 
+                            <span style="width: auto;" class="hand-cursor" (click)="updateAnswer(question.inputType, question.id, option.id, option.isSelected.toString())">{{ option.optionValue }}</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- Buttons -->
+        <div class="question-panel-buttons-panel">
+            <div class="hand-cursor">
+                <input type="checkbox" name="reviewlater" [(ngModel)]="question.reviewlater">
+                <span (click)="question.reviewlater = !question.reviewlater"> Review Later</span>
+            </div>
+            <div class="question-panel-buttons">
+                <button type="button" class="btn btn-primary" [ngClass]="{'hand-cursor': question.num !== 1, 'block-icon': question.num === 1}"
+                    [disabled]="question.num === 1" (click)="onGetNextOrPrevious(question.id, false)">Previous</button>
+                <button type="button" class="btn btn-primary hand-cursor" (click)="onSubmit()">Submit</button>
+                <button type="button" class="btn btn-primary" [ngClass]="{'hand-cursor': !isLastQuestion, 'block-icon': isLastQuestion}"
+                    [disabled]="isLastQuestion" (click)="onGetNextOrPrevious(question.id, true)">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
