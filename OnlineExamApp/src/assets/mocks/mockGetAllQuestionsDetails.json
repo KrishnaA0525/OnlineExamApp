@@ -1,0 +1,330 @@
+[
+  {
+    "id": 1,
+    "num": 1,
+    "question": "If the average of four consecutive odd numbers is 12, find the smallest of these numbers?",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 1,
+        "isSelected": 0,
+        "optionValue": "5",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 1,
+        "isSelected": 0,
+        "optionValue": "7",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 1,
+        "isSelected": 0,
+        "optionValue": "9",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 1,
+        "isSelected": 0,
+        "optionValue": "11",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "num": 2,
+    "question": "Samuel covers the distance from his home to his office at a speed of 25 km/hr and comes back at a speed of 4 km/hr. He completes the whole journey within 5 hours 48 minutes. Find out the distance from his home to office(in km):",
+    "inputType": "text",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 2,
+        "isSelected": 0,
+        "optionValue": null,
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "num": 3,
+    "question": "A policeman sees a thief at a distance of 100 meters and starts to chase him. The thief sees him and starts to run too. If the thief is running at the speed of 8 km/hr and the policeman is running at the speed of 10 km/hr, find out the distance covered by the thief before the policeman catches him(in meters).",
+    "inputType": "text",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 3,
+        "isSelected": 0,
+        "optionValue": null,
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "num": 4,
+    "question": "There are two types of sugar. One is priced at Rs 62 per kg and the other is priced at Rs 72 per kg. If the two types are mixed together, the price of new mixture will be Rs 64.50 per kg. Find the ratio of the two types of sugar in this new mixture.",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 4,
+        "isSelected": 0,
+        "optionValue": "2:5",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 4,
+        "isSelected": 0,
+        "optionValue": "3:1",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 4,
+        "isSelected": 0,
+        "optionValue": "6:7",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 4,
+        "isSelected": 0,
+        "optionValue": "3:2",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "num": 5,
+    "question": "Today is Monday. After 61 days, it will be:",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 5,
+        "isSelected": 0,
+        "optionValue": "Monday",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 5,
+        "isSelected": 0,
+        "optionValue": "Saturday",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 5,
+        "isSelected": 0,
+        "optionValue": "Sunday",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 5,
+        "isSelected": 0,
+        "optionValue": "Tuesday",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "num": 6,
+    "question": "Drugs and Alcohol ____ together to ____ the risk of cancer in both men and women.",
+    "inputType": "checkbox",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 6,
+        "isSelected": 0,
+        "optionValue": "act",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 6,
+        "isSelected": 0,
+        "optionValue": "acting",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 6,
+        "isSelected": 0,
+        "optionValue": "increase",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 6,
+        "isSelected": 0,
+        "optionValue": "increases",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "num": 7,
+    "question": "In his first public speech, the newly elected defence minister said that leaks in defence matters could potentially ____ military operations.",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 7,
+        "isSelected": 0,
+        "optionValue": "jiopardize",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 7,
+        "isSelected": 0,
+        "optionValue": "jeopardise",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 7,
+        "isSelected": 0,
+        "optionValue": "jeopardice",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 7,
+        "isSelected": 0,
+        "optionValue": "jeopardize",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "num": 8,
+    "question": "Find the part of the sentence that is incorrect in usage:",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 8,
+        "isSelected": 0,
+        "optionValue": "Agitated over the delay in getting arrears",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 8,
+        "isSelected": 0,
+        "optionValue": "factory workers protested against the president",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 8,
+        "isSelected": 0,
+        "optionValue": "when he reaches the factory",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 8,
+        "isSelected": 0,
+        "optionValue": "No Error",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "num": 9,
+    "question": "Select the option that replaces the error (inside square brackets) most appropriately\\n\nSentence - The motto of our company is to make sure that the employees are happy, have the ability to be intellectually stimulated and [contributes towards their growth.]",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 9,
+        "isSelected": 0,
+        "optionValue": "contribute to the growth",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 9,
+        "isSelected": 0,
+        "optionValue": "contribute towards its growth",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 9,
+        "isSelected": 0,
+        "optionValue": "contribute toward its growing",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 9,
+        "isSelected": 0,
+        "optionValue": "No correction required",
+        "answer": null
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "num": 10,
+    "question": "Find the error in the following statement:",
+    "inputType": "radio",
+    "reviewlater": 0,
+    "options": [
+      {
+        "id": 0,
+        "questionId": 10,
+        "isSelected": 0,
+        "optionValue": "Sariska is transforming into",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 10,
+        "isSelected": 0,
+        "optionValue": "throughout the world",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 10,
+        "isSelected": 0,
+        "optionValue": "attracting large number of tourists",
+        "answer": null
+      },
+      {
+        "id": 0,
+        "questionId": 10,
+        "isSelected": 0,
+        "optionValue": "India's most fastest growing sanctuary",
+        "answer": null
+      }
+    ]
+  }
+]
