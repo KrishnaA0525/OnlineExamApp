@@ -1,19 +1,4 @@
-<div *ngIf="!questionLoaded" class="loadingio-spinner-spinner-u9nkw0e5k0k">
-    <div class="ldio-meg98xc3gyn">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
+<app-loading-modal *ngIf="!questionLoaded"></app-loading-modal>
 <div *ngIf="questionLoaded">
     <div class="question-panel">
         <!-- Question -->
@@ -28,7 +13,7 @@
                 <div *ngIf="question.inputType !== 'text'">
                     <ol>
                         <li *ngFor="let option of question.options; let i = index" [@optionTrigger]>
-                            <input [type]="question.inputType" class="hand-cursor" name="name" [checked]="option.isSelected"> 
+                            <input [type]="question.inputType" class="hand-cursor" name="name" [checked]="option.isSelected" (click)="updateAnswer(question.inputType, question.id, option.id, option.isSelected.toString())"> 
                             <span style="width: auto;" class="hand-cursor" (click)="updateAnswer(question.inputType, question.id, option.id, option.isSelected.toString())">{{ option.optionValue }}</span>
                         </li>
                     </ol>
@@ -38,8 +23,9 @@
         <!-- Buttons -->
         <div class="question-panel-buttons-panel">
             <div class="hand-cursor">
-                <input type="checkbox" name="reviewlater" [(ngModel)]="question.reviewlater">
-                <span (click)="question.reviewlater = !question.reviewlater"> Review Later</span>
+                <input type="checkbox" name="reviewlater" [checked]="question.reviewlater" (click)="onReviewLater(question)">
+                <span (click)="onReviewLater(question)">Review Later</span>
+                <!-- <ng-container *ngIf="true" style="color: red;" (click)="onReviewLater(question)">Review Later</ng-container> -->
             </div>
             <div class="question-panel-buttons">
                 <button type="button" class="btn btn-primary" [ngClass]="{'hand-cursor': question.num !== 1, 'block-icon': question.num === 1}"

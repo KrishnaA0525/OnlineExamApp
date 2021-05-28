@@ -26,8 +26,5 @@ export class BtnHighlightDirective implements OnInit {
 	}
 
 	ngOnInit() {
-		if (this.btnReviewColor) {
-			this.renderer.setStyle(this.elementRef.nativeElement, "background-color", "orange");
-		}
 	}
 }

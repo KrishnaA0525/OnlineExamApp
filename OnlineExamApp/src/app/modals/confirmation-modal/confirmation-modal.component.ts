@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -29,6 +29,7 @@ import { interval } from 'rxjs';
 })
 export class ConfirmationModalComponent implements OnInit {
 
+  intervalSub: Subscription = new Subscription;
   state = "left";
   timer = 5;
 
@@ -37,17 +38,18 @@ export class ConfirmationModalComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.state = "right";
-    }, 10)
-    let sub = interval(1000).subscribe(count => {
+    }, 1)
+    this.intervalSub = interval(1000).subscribe(count => {
       this.timer--;
       if (count >= 4) {
-        sub.unsubscribe();
+        this.intervalSub.unsubscribe();
         this.close();
       }
     });
   }
 
   close() {
+    this.intervalSub.unsubscribe();
     this.matDialogRef.close();
   }
 

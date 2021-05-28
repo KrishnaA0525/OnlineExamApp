@@ -12,10 +12,10 @@ import { QuestionsService } from '../service/questions.service';
 	styleUrls: ['./question-numbers.component.css'],
 	animations: [
 		trigger('questionNumTrigger', [
-			state('start', style({
+			/* state('start', style({
 				opacity: 1,
 				transform: 'translateY(0px)'
-			})),
+			})), */
 			transition('void => *', [
 				style({
 					opacity: 0,
@@ -29,27 +29,20 @@ import { QuestionsService } from '../service/questions.service';
 export class QuestionNumbersComponent implements OnInit, OnDestroy {
 	currentQuestion!: Question;
 	questions: Question[] = [];
-	questionsSubscription: Subscription = new Subscription();
+	questionIdSubscription: Subscription = new Subscription();
 
 	constructor(private questionsService: QuestionsService, private router: Router, private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
-		/* this.questionsSubscription = this.questionsService.allQuestionsSub.subscribe(
-			data => {
-				this.questions = data;
-				this.currentQuestion = this.questions[0];
-				this.showQuestion(this.questions[0].id);
-			}
-		); */
 		this.questions = this.questionsService.allQuestions;
 		this.currentQuestion = this.questions[0];
 		this.showQuestion(this.questions[0].id);
-		this.questionsService.questionIdSubject.subscribe((questionId: number) => {
+		this.questionIdSubscription = this.questionsService.questionIdSubject.subscribe((questionId: number) => {
 			this.showQuestion(questionId);
 		});
 	}
 
-	showQuestion(questionId: number | undefined): void {
+	showQuestion(questionId: number): void {
 		this.router.events.subscribe((event: Event) => {
 			if (event instanceof NavigationEnd) {
 				this.questions.forEach((question: Question) => {
@@ -67,7 +60,7 @@ export class QuestionNumbersComponent implements OnInit, OnDestroy {
 		this.router.navigate([questionId], { relativeTo: this.route, queryParamsHandling: "merge" });
 	}
 
-	isActive(questionId: number | undefined): boolean {
+	isActive(questionId: number): boolean {
 		return questionId === this.currentQuestion.id;
 	}
 
@@ -91,7 +84,7 @@ export class QuestionNumbersComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.questionsSubscription.unsubscribe();
+		this.questionIdSubscription.unsubscribe();
 	}
 
 }

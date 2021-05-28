@@ -31,7 +31,12 @@ const routes: Routes = [
             {
                 path: ":id",
                 component: QuestionPanelComponent
-            }
+            }/* ,
+            {
+                path: "",
+                redirectTo: "/:id",
+                pathMatch: "full"
+            } */
         ]
     },
     {

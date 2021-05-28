@@ -14,9 +14,9 @@ import { QuestionNumbersComponent } from './question-numbers/question-numbers.co
 import { QuestionPanelComponent } from './question-panel/question-panel.component';
 import { BtnHighlightDirective } from './directives/btn-highlight.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
 import { AgGridModule } from 'ag-grid-angular';
 import { ResultsComponent } from './results/results.component';
+import { QuestionsService } from './service/questions.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,10 @@ import { ResultsComponent } from './results/results.component';
     ModalModule,
     AgGridModule.withComponents([])
   ],
-  providers: [],
+  providers: [
+    QuestionsService,
+    /* { provide: "QuestionsService", useClass: QuestionsService } */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

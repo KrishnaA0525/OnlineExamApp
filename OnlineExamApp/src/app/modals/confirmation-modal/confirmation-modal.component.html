@@ -5,6 +5,7 @@
 
 	<div class="modal-body no-padding-top">
 		<div class="text-center">
+			<div class="" *ngIf="modalData.reviewCount !== 0">You saved {{ modalData.reviewCount }} question(s) to review later!</div>
 			<div class="">{{ modalData.message }}</div>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
 import { Question } from '../model/question';
 
 import { QuestionsService } from '../service/questions.service';
@@ -11,19 +11,11 @@ import { QuestionsService } from '../service/questions.service';
 })
 export class HomeComponent implements OnInit {
 
-	constructor(private activatedRoute: ActivatedRoute, private questionsService: QuestionsService) { }
+	constructor(private activatedRoute: ActivatedRoute, private questionsService: QuestionsService, private router: Router) { }
 
 	ngOnInit(): void {
 		this.questionsService.allQuestions = this.activatedRoute.snapshot.data.questions[0] ? this.activatedRoute.snapshot.data.questions[0] : [];
 		var qstns = this.questionsService.allQuestions;
-		
-		/* this.questionsService.allQuestionsSub.next(qstns);
-		this.activatedRoute.data.subscribe(
-			(data: Data) => {
-				var qstns = data.questions?.questionsDetails;
-				this.questionsService.allQuestionsSub.next(qstns);
-			}
-		); */
 	}
 
 }

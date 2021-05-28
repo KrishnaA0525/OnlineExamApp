@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, Event, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -13,10 +13,10 @@ import { QuestionsService } from '../service/questions.service';
 	styleUrls: ['./question-panel.component.css'],
 	animations: [
 		trigger('questionTrigger', [
-			state('start', style({
+			/* state('start', style({
 				opacity: 1,
 				transform: 'translateX(0px)'
-			})),
+			})), */
 			transition('void => *', [
 				style({
 					opacity: 0,
@@ -46,8 +46,11 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 	questionSubscription = new Subscription;
 	questionLoaded = false;
 	isLastQuestion = false;
+	private questionsService: any;
 
-	constructor(private questionsService: QuestionsService, private route: ActivatedRoute, private router: Router) { }
+	constructor(/* private questionsService: QuestionsService,  */private injector: Injector, private route: ActivatedRoute, private router: Router) {
+		this.questionsService = this.injector.get(QuestionsService);
+	}
 
 	ngOnInit(): void {
 		this.route.params.pipe(delay(800)).subscribe(
@@ -65,17 +68,6 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 					this.isLastQuestion = false;
 				}
 				this.questionLoaded = true;
-				/* this.questionSubscription = this.questionsService.getQuestion(questionId).subscribe(
-				  data => {
-					data.questionsDetails.forEach((element: Question) => {
-					  if (element.id === questionId) {
-						//this.questionsService.questionSubject.next(element);
-						this.question = element;
-					  }
-					  this.questionLoaded = true;
-					});
-				  }
-				); */
 			}
 		);
 		this.router.events.subscribe((event: Event) => {
@@ -111,13 +103,22 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 
 	onGetNextOrPrevious(id: number, isNext: boolean) {
 		var allQuestions = this.questionsService.allQuestions;
-		var curQuestionIndex = allQuestions.findIndex(question => {
+		var curQuestionIndex = allQuestions.findIndex((question: Question) => {
 			return id === question.id;
 		})
 
 		var nextOrPreviousIndex = isNext ? curQuestionIndex + 1 : curQuestionIndex - 1;
 		var nextOrPreviousId = allQuestions[nextOrPreviousIndex]?.id;
 		this.questionsService.questionIdSubject.next(nextOrPreviousId);
+	}
+
+	onReviewLater(question: Question) {
+		if (question.reviewlater) {
+			this.questionsService.inReviewCount--;
+		} else {
+			this.questionsService.inReviewCount++;
+		}
+		question.reviewlater = !question.reviewlater;
 	}
 
 	onSubmit(): void {

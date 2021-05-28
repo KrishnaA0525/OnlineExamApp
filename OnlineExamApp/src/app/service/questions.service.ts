@@ -3,11 +3,12 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { Question } from "../model/question";
 
-@Injectable({
+@Injectable(/* {
     providedIn: 'root'
-})
+} */)
 export class QuestionsService {
     allQuestions: Question[] = [];
+    inReviewCount: number = 0;
     allQuestionsSub = new Subject<Question[]>();
     questionSubject = new Subject<Question>();
     updateAnsSubject = new Subject<any>();

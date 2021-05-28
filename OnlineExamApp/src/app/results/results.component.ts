@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Answer } from '../model/answer';
 
-import { Question } from '../model/question';
+import { Option, Question } from '../model/question';
 import { AnswerService } from '../service/answer.service';
 import { ResultsDeactivateInterface } from '../service/gaurds/results-deactivate.gaurd';
 import { QuestionsService } from '../service/questions.service';
@@ -37,19 +37,16 @@ export class ResultsComponent implements OnInit, OnDestroy, ResultsDeactivateInt
 	constructor(private questionsService: QuestionsService, private router: Router, private answerService: AnswerService) { }
 
 	ngOnInit(): void {
-		console.log(1);
 		this.allQuestions = this.questionsService.allQuestions;
 		this.answerService.getAnswers().subscribe((data: Answer[]) => {
 			this.answers = data;
-			console.log(2);
 			console.log(this.allQuestions.length);
 			this.allQuestions.forEach(question => {
-				console.log(3);
 				let row = {
-					question: question.num + " " + question.question,
-					actualAnswer: "",
-					yourAnswer: "",
-					marks: ""
+					question: question.num + ". " + question.question,
+					actualAnswer: this.getActualAnswer(question.id),
+					yourAnswer: this.getUserAnswer(question.id, question.inputType),
+					marks: this.getActualAnswer(question.id) === this.getUserAnswer(question.id, question.inputType) ? 1 : 0
 				};
 				this.rowData.push(row);
 			});
@@ -60,6 +57,38 @@ export class ResultsComponent implements OnInit, OnDestroy, ResultsDeactivateInt
 	onGridReady(params: any) {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
+	}
+
+	getActualAnswer(questionId: number) {
+		const answerObj = this.answers.find((answer: Answer) => {
+			return questionId === answer.questionId;
+		});
+
+		return answerObj?.answers.join(", ");
+	}
+
+	getUserAnswer(questionId: number, inputType: string) {
+		const questionObj = this.allQuestions.find((question: Question) => {
+			return questionId === question.id;
+		});
+		let userAnswers: string[] = [];
+		questionObj?.options.forEach((option: Option) => {
+			if (inputType === "text") {
+				if (option.answer !== null && option.answer?.trim().length !== 0) {
+					userAnswers.push(option.answer);					
+				}
+			} else {
+				if (option.isSelected) {
+					userAnswers.push(option.optionValue)
+				}
+			}
+		});
+
+		if (userAnswers.length === 0) {
+			userAnswers.push("Not Answered!");
+		}
+
+		return userAnswers.join(", ");
 	}
 
 	continue() {
