@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { ResultsComponent } from './results/results.component';
 import { QuestionsService } from './service/questions.service';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,11 @@ import { QuestionsService } from './service/questions.service';
     HttpClientModule,
     BrowserAnimationsModule,
     ModalModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    MatDialogModule
   ],
   providers: [
-    QuestionsService,
+    QuestionsService
     /* { provide: "QuestionsService", useClass: QuestionsService } */
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from "@angular/platform-browser";
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';

@@ -34,15 +34,5 @@ export class QuestionsResolver implements Resolve<Question[]> {
         forkJoinList.push(res1);
         var res2 = this.questionsService.getAllQuestions()
         return forkJoin(forkJoinList);
-        // return of(res1, res2, interval(2000).pipe(take(1))).pipe(concatAll());
-        //return of(res1, res2).subscribe();
-        /* .subscribe(
-            data => {
-                this.allQuestions = data.questionsDetails;
-                this.questionsService.allQuestions = this.allQuestions;
-                //this.questionsService.allQuestionsSub.next(this.allQuestions);
-            }
-        );
-        return this.allQuestions; */
     }
 }

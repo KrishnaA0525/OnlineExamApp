@@ -1,4 +1,4 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, Event, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -26,16 +26,27 @@ import { QuestionsService } from '../service/questions.service';
 			])
 		]),
 		trigger('optionTrigger', [
-			state('start', style({
+			/* state('start', style({
 				opacity: 1,
 				transform: 'translateX(0px)'
-			})),
-			transition('void => *', [
+			})), */
+			/* transition('void => *', [
 				style({
 					opacity: 0,
 					transform: 'translateX(-70px)'
 				}),
 				animate(500)
+			]) */
+			transition('void => *', [
+				query(':enter', [
+					style({ opacity: 0 }),
+					stagger('100ms', [
+						style({ opacity: 0, transform: 'translateX(-50px)' }),
+						//animate('500ms ease-out', style({ opacity: 1, transform: 'translateX(0px)' }))
+						animate('500ms ease-out')
+					])
+				],
+				{ optional: true })
 			])
 		])
 	]
@@ -46,10 +57,10 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 	questionSubscription = new Subscription;
 	questionLoaded = false;
 	isLastQuestion = false;
-	private questionsService: any;
+	/* private questionsService: any; */
 
-	constructor(/* private questionsService: QuestionsService,  */private injector: Injector, private route: ActivatedRoute, private router: Router) {
-		this.questionsService = this.injector.get(QuestionsService);
+	constructor(private questionsService: QuestionsService, private injector: Injector, private route: ActivatedRoute, private router: Router) {
+		/* this.questionsService = this.injector.get(QuestionsService); */
 	}
 
 	ngOnInit(): void {
@@ -62,7 +73,7 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 						this.question = element;
 					}
 				});
-				if (this.question.id === allQuestions[allQuestions.length - 1]?.id) {
+				if (this.question && this.question.id === allQuestions[allQuestions.length - 1]?.id) {
 					this.isLastQuestion = true;
 				} else {
 					this.isLastQuestion = false;
@@ -75,10 +86,6 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 				this.questionLoaded = false;
 			}
 		});
-	}
-
-	isOptionEmpty(val: any): boolean {
-		return typeof val !== "undefined" ? true : false;
 	}
 
 	updateAnswer(inputType: string, questionId: number, optionId: number, answer: string): void {

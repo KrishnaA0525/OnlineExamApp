@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { interval, Subscription } from 'rxjs';
 
+const timer: number = 5;
+
 @Component({
   selector: 'app-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
@@ -23,7 +25,7 @@ import { interval, Subscription } from 'rxjs';
         padding: 0,
         transform: 'translateX(0px)'
       })),
-      transition('left => right', animate(5000))
+      transition('left => right', animate(timer * 1000))
     ])
   ]
 })
@@ -31,7 +33,7 @@ export class ConfirmationModalComponent implements OnInit {
 
   intervalSub: Subscription = new Subscription;
   state = "left";
-  timer = 5;
+  timer = timer;
 
   constructor(@Inject(MAT_DIALOG_DATA) public modalData: any, private matDialogRef: MatDialogRef<ConfirmationModalComponent>) { }
 

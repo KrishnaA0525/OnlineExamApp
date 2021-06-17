@@ -1,5 +1,5 @@
 <app-loading-modal *ngIf="!questionLoaded"></app-loading-modal>
-<div *ngIf="questionLoaded">
+<ng-template [ngIf]="questionLoaded">
     <div class="question-panel">
         <!-- Question -->
         <div class="question-qa-panel">
@@ -11,10 +11,10 @@
                     <input type="text" [(ngModel)]="question.options[0].answer" name="name" (blur)="updateAnswer('text', question.id, 0, question.options[0].answer)"/>
                 </div>
                 <div *ngIf="question.inputType !== 'text'">
-                    <ol>
-                        <li *ngFor="let option of question.options; let i = index" [@optionTrigger]>
+                    <ol [@optionTrigger]="question.options.length">
+                        <li *ngFor="let option of question.options; let i = index">
                             <input [type]="question.inputType" class="hand-cursor" name="name" [checked]="option.isSelected" (click)="updateAnswer(question.inputType, question.id, option.id, option.isSelected.toString())"> 
-                            <span style="width: auto;" class="hand-cursor" (click)="updateAnswer(question.inputType, question.id, option.id, option.isSelected.toString())">{{ option.optionValue }}</span>
+                            <span style="width: auto;" class="hand-cursor" (click)="updateAnswer(question.inputType, question.id, option.id, option.isSelected.toString())"> {{ option.optionValue }}</span>
                         </li>
                     </ol>
                 </div>
@@ -36,4 +36,4 @@
             </div>
         </div>
     </div>
-</div>
+</ng-template>
