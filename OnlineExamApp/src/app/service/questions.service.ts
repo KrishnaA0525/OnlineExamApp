@@ -13,12 +13,17 @@ export class QuestionsService {
     questionSubject = new Subject<Question>();
     updateAnsSubject = new Subject<any>();
     questionIdSubject = new Subject<number>();
+    isAutoSubmit: boolean = false;
 
     constructor (private httpClient: HttpClient) {}
 
     getAllQuestions() {
         //return this.httpClient.get<any>('assets/mocks/mockGetAllQuestionsDetails.json');
-        return this.httpClient.get<any>('http://localhost:8082/questionsservice/allquestions');
+        return this.httpClient.get<any>('http://localhost:8082/questionsservice/allquestions', {
+            headers: {
+                
+            }
+        });
     }
 
     getQuestion(id: number): Observable<any> {

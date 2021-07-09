@@ -8,6 +8,7 @@ import { ResultsComponent } from './results/results.component';
 import { QuestionsDeactivateGaurd } from './service/gaurds/questions-deactivate.gaurd';
 import { ResultsDeactivateGaurd } from './service/gaurds/results-deactivate.gaurd';
 import { QuestionsResolver } from './service/resolver/questions-resolver.service';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { TestInfoComponent } from './test-info/test-info.component';
 
 
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: "login",
         component: LoginComponent
+    },
+    {
+        path: "signup",
+        component: SignUpComponent
     },
     {
         path: "testinfo",

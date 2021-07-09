@@ -1,7 +1,7 @@
 .question-panel {
     background-color: #C8D0D5;
     width: 100%;
-    height: calc(100vh - 57px);
+    /* height: calc(100vh - 57px); */
     overflow-y: auto;
 }
 
@@ -13,7 +13,7 @@
     padding-right: 1%;
     background-color: #e7b472;
     text-align: right;
-    width: calc(100vw - 20%); /* 20% is taken by question-numbers */
+    width: calc(100vw - 20%);  /* 20% is taken by question-numbers */
     position: absolute;
     bottom: 0px;
 }

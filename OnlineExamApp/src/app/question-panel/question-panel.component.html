@@ -8,7 +8,7 @@
             <!-- Options -->
             <div *ngIf="question && question.options">
                 <div *ngIf="question.inputType === 'text'" [@optionTrigger]>
-                    <input type="text" [(ngModel)]="question.options[0].answer" name="name" (blur)="updateAnswer('text', question.id, 0, question.options[0].answer)"/>
+                    <input type="text" [(ngModel)]="textAnswer" name="name" (blur)="updateAnswer('text', question.id, 0, textAnswer)"/>
                 </div>
                 <div *ngIf="question.inputType !== 'text'">
                     <ol [@optionTrigger]="question.options.length">
@@ -20,20 +20,21 @@
                 </div>
             </div>
         </div>
-        <!-- Buttons -->
-        <div class="question-panel-buttons-panel">
-            <div class="hand-cursor">
-                <input type="checkbox" name="reviewlater" [checked]="question.reviewlater" (click)="onReviewLater(question)">
-                <span (click)="onReviewLater(question)">Review Later</span>
-                <!-- <ng-container *ngIf="true" style="color: red;" (click)="onReviewLater(question)">Review Later</ng-container> -->
-            </div>
-            <div class="question-panel-buttons">
-                <button type="button" class="btn btn-primary" [ngClass]="{'hand-cursor': question.num !== 1, 'block-icon': question.num === 1}"
-                    [disabled]="question.num === 1" (click)="onGetNextOrPrevious(question.id, false)">Previous</button>
-                <button type="button" class="btn btn-primary hand-cursor" (click)="onSubmit()">Submit</button>
-                <button type="button" class="btn btn-primary" [ngClass]="{'hand-cursor': !isLastQuestion, 'block-icon': isLastQuestion}"
-                    [disabled]="isLastQuestion" (click)="onGetNextOrPrevious(question.id, true)">Next</button>
-            </div>
+    </div><!-- Buttons -->
+    <div class="question-panel-buttons-panel">
+        <div class="hand-cursor">
+            <input type="checkbox" name="reviewlater" [checked]="question.reviewlater" (click)="onReviewLater(question)">
+            <span (click)="onReviewLater(question)">Review Later</span>
+            <!-- <ng-container *ngIf="true" style="color: red;" (click)="onReviewLater(question)">Review Later</ng-container> -->
+        </div>
+        <div class="question-panel-buttons">
+            <button type="button" class="btn btn-primary"
+                [ngClass]="{'hand-cursor': question.num !== 1, 'block-icon': question.num === 1}"
+                [disabled]="question.num === 1" (click)="onGetNextOrPrevious(question.id, false)">Previous</button>
+            <button type="button" class="btn btn-primary hand-cursor" (click)="onSubmit()">Submit</button>
+            <button type="button" class="btn btn-primary"
+                [ngClass]="{'hand-cursor': !isLastQuestion, 'block-icon': isLastQuestion}" [disabled]="isLastQuestion"
+                (click)="onGetNextOrPrevious(question.id, true)">Next</button>
         </div>
     </div>
 </ng-template>

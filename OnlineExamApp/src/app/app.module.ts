@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -18,6 +18,11 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ResultsComponent } from './results/results.component';
 import { QuestionsService } from './service/questions.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { HeaderComponent } from './header/header.component';
+import { TimeFormatterPipe } from './pipes/time-formatter.pipe';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './question-panel/qp-store/questions.reducer';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,10 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     QuestionNumbersComponent,
     QuestionPanelComponent,
     ResultsComponent,
-    BtnHighlightDirective
+    BtnHighlightDirective,
+    HeaderComponent,
+    TimeFormatterPipe,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,9 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     BrowserAnimationsModule,
     ModalModule,
     AgGridModule.withComponents([]),
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot({ questions: reducer })
   ],
   providers: [
     QuestionsService

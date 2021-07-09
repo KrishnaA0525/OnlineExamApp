@@ -1,0 +1,13 @@
+.app-header {
+	height: 100%;
+	padding: 5px 5px 5px 5px;
+	display: flex;
+}
+
+.timer, h1 {
+	margin: auto;
+}
+
+.user-name {
+	padding: 0 5px 0 0;
+}

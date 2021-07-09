@@ -13,6 +13,9 @@ export class QuestionsDeactivateGaurd implements CanDeactivate<QuestionPanelComp
 	constructor(private matDialog: MatDialog, private router: Router, private questionsService: QuestionsService) {}
 
 	canDeactivate(component: QuestionPanelComponent, activatedRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState: RouterStateSnapshot) {
+		if (this.questionsService.isAutoSubmit) {
+			return true;
+		}
 		return new Promise<boolean>((resolve, reject) => {
 			this.matDialog.open(ConfirmationModalComponent, {
 				data: {

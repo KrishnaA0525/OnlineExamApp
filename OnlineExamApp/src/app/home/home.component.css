@@ -1,18 +1,34 @@
-.home {
+.main-home {
 	width: 100vw;
-	height: 100vh;
+	height: calc(100vh);
 	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	background-color: #9dc0d6;
+	flex: 1;
+}
+
+.home {
+	/* width: 100vw; */
+	height: calc(100vh);
+	display: flex;
+	flex: 10;
 }
 
 .app-question-numbers {
 	background-color: #AFB6BA;
 	padding-right: 0;
+	padding-top: 10px;
 	width: 20%;
-	height: 100vh;
+	/* height: calc(100vh - 50px); */
 }
 
 .app-question-panel {
 	background-color: #C8D0D5;
 	width: 80%;
 	padding-left: 0;
+	padding-top: 15px;
+	/* height: calc(100vh - 50px); */
 }

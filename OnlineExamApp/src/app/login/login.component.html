@@ -1,11 +1,14 @@
 <div class="container">
-    <div class="align-center"><h2>Welcome to JAM Online Test</h2></div>
+    <div class="align-center">
+        <h2>Welcome to JAM Online Test</h2>
+        <h2 class="hand-cursor login-signup" [routerLink]="['/signup']">Sign up here</h2>
+    </div>
     <form #loginForm="ngForm" ngNativeValidate (ngSubmit)="submitLogin(loginForm)">
         <!-- Panel -->
         <div class="panel panel-primary">
             <!-- Heading -->
             <div class="panel-heading">
-                <h4>Login</h4>
+                <h4><b> Login </b></h4>
             </div>
     
             <!-- Body -->
@@ -13,13 +16,35 @@
                 <div *ngIf="errorMsg" class="danger-color">
                     {{ errorMsg }}
                 </div>
-                <div class="form-group" [class.has-error]="hallticketNumber.invalid && hallticketNumber.touched">
+                <!-- <div class="form-group" [class.has-error]="hallticketNumber.invalid && hallticketNumber.touched">
                     <label for="hallticketNumber" class="control-label">Hallticket number: </label>
                     <input type="text" class="form-control" id="hallticketNumber" name="hallticketNumber"
                         [(ngModel)]="login.hallticketNumber" #hallticketNumber="ngModel" required>
-                    <span class="help-block" *ngIf="hallticketNumber.invalid && hallticketNumber.touched">
+                    <span class="help-block" *ngIf="hallticketNumber.invalid && hallticketNumber.touched" style="color: orange;">
                         Hallticket number is required.
                     </span>
+                </div> -->
+                <!-- Template driven approach -->
+                <div class="form-group">
+                    <label for="hallticketNumber" class="control-label">Hallticket number*</label>
+                    <input type="text"
+                        id="hallticketNumber"
+                        class="form-control"
+                        ngModel
+                        name="hallticketNumber"
+                        #hallticketNumber="ngModel"
+                        required>
+                    <div class="help-block" *ngIf="hallticketNumber.invalid && hallticketNumber.touched" style="color: red;">
+                        Hallticket number is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Email*</label>
+                    <input type="text" id="email" class="form-control" ngModel name="email"
+                        #email="ngModel" required email>
+                    <div class="help-block" *ngIf="email.invalid && email.touched" style="color: red;">
+                        Please enter a valid Email addess.
+                    </div>
                 </div>
             </div>
     

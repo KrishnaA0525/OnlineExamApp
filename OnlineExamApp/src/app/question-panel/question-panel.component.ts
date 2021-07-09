@@ -1,11 +1,13 @@
-import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
+import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, Event, NavigationEnd } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { Question } from '../model/question';
 import { QuestionsService } from '../service/questions.service';
+import * as questionActions from './qp-store/questions.actions';
 
 @Component({
 	selector: 'app-question-panel',
@@ -57,14 +59,13 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 	questionSubscription = new Subscription;
 	questionLoaded = false;
 	isLastQuestion = false;
-	/* private questionsService: any; */
+	textAnswer: string = "";
 
-	constructor(private questionsService: QuestionsService, private injector: Injector, private route: ActivatedRoute, private router: Router) {
-		/* this.questionsService = this.injector.get(QuestionsService); */
+	constructor(private questionsService: QuestionsService, private injector: Injector, private route: ActivatedRoute, private router: Router, private store: Store) {
 	}
 
 	ngOnInit(): void {
-		this.route.params.pipe(delay(800)).subscribe(
+		this.route.params.pipe(delay(500)).subscribe(
 			(params: Params) => {
 				var questionId = +params['id'];
 				var allQuestions = this.questionsService.allQuestions;
@@ -90,17 +91,23 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 
 	updateAnswer(inputType: string, questionId: number, optionId: number, answer: string): void {
 		var allQuestions = this.questionsService.allQuestions;
-		allQuestions.forEach((question: Question) => {
+		allQuestions.forEach((question: Question, index) => {
 			if (question && (question.id === questionId) && question.options) {
+				let questionUpdated = {...question};
+				this.store.dispatch(questionActions.updateAnswer({ questionIndex: index, question: { ...question } }));
 				if (inputType === "text") {
-					question?.options ? question.options[optionId].answer = answer : "";
+					//question?.options ? question.options[optionId].answer = answer : "";
+					questionUpdated.options[0].answer = answer;
+					//this.store.dispatch(questionActions.updateAnswer({questionIndex: index, question: {...question}}));
+					this.store.dispatch(questionActions.updateAnswer({ questionIndex: index, question: questionUpdated }));
 				} else {
 					for (let j = 0; j < question.options.length; j++) {
 						const option = question.options[j];
+						this.store.dispatch(questionActions.updateAnswer({ questionIndex: index, question: { ...question } }));
 						if (option.id === optionId) {
-							option.isSelected = !option.isSelected;
+							//option.isSelected = !option.isSelected;
 						} else if (inputType === "radio") {
-							option.isSelected = false;
+							//option.isSelected = false;
 						}
 					}
 				}

@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="align-center">
+		<h2>Welcome to JAM Online Test</h2>
+		<h2 class="hand-cursor login-signup" [routerLink]="['/login']">Login here</h2>
+	</div>
+	<form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+		<h4><b> Sign Up </b></h4>
+		<div class="form-froup">
+			<label for="name">Name</label>
+			<input type="text" id="name" class="form-control" formControlName="name">
+		</div>
+		<div class="form-froup">
+			<label for="email">Email</label>
+			<input type="email" id="email" class="form-control" formControlName="email">
+		</div>
+		<div class="form-froup">
+			<label for="mobile">Mobile</label>
+			<input type="text" id="mobile" class="form-control" formControlName="mobile">
+		</div>
+		<div class="form-froup">
+			<label for="dob">Date of Birth</label>
+			<input type="date" id="dob" class="form-control" formControlName="dob">
+		</div>
+		<div class="radio">
+			<label for="gender">
+				Male <input type="radio" id="gender" [value]="'male'" class="form-control" formControlName="gender">
+				Female <input type="radio" id="gender" [value]="'female'" class="form-control" formControlName="gender">
+			</label>
+		</div>
+		<div class="align-right">
+			<button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign-Up</button>
+		</div>
+	</form>
+</div>

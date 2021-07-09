@@ -1,7 +1,11 @@
-.align-center {
-    text-align: center;
-}
-
 .danger-color {
     color: red;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px red solid;
+}
+
+.login-signup:hover {
+    color: royalblue;
 }
