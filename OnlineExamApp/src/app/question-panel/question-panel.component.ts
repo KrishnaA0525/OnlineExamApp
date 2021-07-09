@@ -60,6 +60,7 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 	questionLoaded = false;
 	isLastQuestion = false;
 	textAnswer: string = "";
+	
 
 	constructor(private questionsService: QuestionsService, private injector: Injector, private route: ActivatedRoute, private router: Router, private store: Store) {
 	}
