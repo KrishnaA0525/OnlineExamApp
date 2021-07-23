@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { cloneDeep } from 'lodash';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Answer } from '../model/answer';
 
 import { Option, Question } from '../model/question';
+import { State } from '../question-panel/qp-store/questions.reducer';
+import { selectQuestions } from '../question-panel/qp-store/questions.selectors';
 import { AnswerService } from '../service/answer.service';
 import { ResultsDeactivateInterface } from '../service/gaurds/results-deactivate.gaurd';
 import { QuestionsService } from '../service/questions.service';
@@ -34,10 +39,10 @@ export class ResultsComponent implements OnInit, OnDestroy, ResultsDeactivateInt
 		autoHeight: true
 	};
 
-	constructor(private questionsService: QuestionsService, private router: Router, private answerService: AnswerService) { }
+	constructor(private questionsService: QuestionsService, private router: Router, private answerService: AnswerService, private store: Store<State>) { }
 
 	ngOnInit(): void {
-		this.allQuestions = this.questionsService.allQuestions;
+		/* this.allQuestions = this.questionsService.allQuestions;
 		this.answerService.getAnswers().subscribe((data: Answer[]) => {
 			this.answers = data;
 			console.log(this.allQuestions.length);
@@ -51,6 +56,24 @@ export class ResultsComponent implements OnInit, OnDestroy, ResultsDeactivateInt
 				this.rowData.push(row);
 			});
 			this.showGrid = true;
+		}); */
+
+		this.store.select(selectQuestions).pipe(take(1)).subscribe(state => {
+			this.allQuestions = cloneDeep(state.questions);
+			this.answerService.getAnswers().subscribe((data: Answer[]) => {
+				this.answers = data;
+				console.log(this.allQuestions.length);
+				this.allQuestions.forEach(question => {
+					let row = {
+						question: question.num + ". " + question.question,
+						actualAnswer: this.getActualAnswer(question.id),
+						yourAnswer: this.getUserAnswer(question.id, question.inputType),
+						marks: this.getActualAnswer(question.id) === this.getUserAnswer(question.id, question.inputType) ? 1 : 0
+					};
+					this.rowData.push(row);
+				});
+				this.showGrid = true;
+			});
 		});
 	}
 

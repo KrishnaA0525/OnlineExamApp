@@ -2,6 +2,6 @@
     <span *ngFor="let question of questions" class="q-num-button-separator">
         <!-- <button [routerLink]="[question.id]" [class.active-question]="isActive(question.id) && !isAnswered(question) && !question.reviewlater" [class.answered]="isAnswered(question) && !question.reviewlater" [class.reviewLater]="question.reviewlater" class="hand-cursor" (click)="showQuestion(question.id)">{{question?.num}}</button> -->
 
-        <button [routerLink]="[question.id]" appBtnHighlight [btnActiveColor]="isActive(question.id) && !isAnswered(question) && !question.reviewlater" [btnAnsweredColor]="isAnswered(question) && !question.reviewlater" [btnReviewColor]="question.reviewlater ? true : false" class="hand-cursor" (click)="showQuestion(question.id)" [@questionNumTrigger]>{{question?.num}}</button>
+        <button [routerLink]="[question.id]" appBtnHighlight [btnActive]="isActive(question.id) && !isAnswered(question) && !question.reviewlater" [btnAnswered]="isAnswered(question) && !question.reviewlater" [btnReview]="isReviewLater(question)" class="hand-cursor" (click)="showQuestion(question.id)" [@questionNumTrigger]>{{question?.num}}</button>
     </span>
 </div>

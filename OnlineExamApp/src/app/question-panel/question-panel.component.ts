@@ -2,12 +2,15 @@ import { trigger, style, transition, animate, query, stagger } from '@angular/an
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, Event, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, take } from 'rxjs/operators';
 
 import { Question } from '../model/question';
 import { QuestionsService } from '../service/questions.service';
 import * as questionActions from './qp-store/questions.actions';
+import { State } from './qp-store/questions.reducer';
+import { questions, selectQuestions } from './qp-store/questions.selectors';
 
 @Component({
 	selector: 'app-question-panel',
@@ -60,16 +63,36 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 	questionLoaded = false;
 	isLastQuestion = false;
 	textAnswer: string = "";
-	
 
-	constructor(private questionsService: QuestionsService, private injector: Injector, private route: ActivatedRoute, private router: Router, private store: Store) {
+
+	constructor(private questionsService: QuestionsService, private injector: Injector, private route: ActivatedRoute, private router: Router, private store: Store<State>) {
 	}
 
 	ngOnInit(): void {
 		this.route.params.pipe(delay(500)).subscribe(
 			(params: Params) => {
 				var questionId = +params['id'];
-				var allQuestions = this.questionsService.allQuestions;
+				this.questionSubscription = this.store.select(selectQuestions).pipe(take(1)).subscribe(
+					store => {
+						let allQuestions = cloneDeep(store.questions);
+						/* allQuestions.forEach((element: Question) => {
+							if (element.id === questionId) {
+								this.question = element;
+							}
+						}); */
+						const qInd = allQuestions.findIndex(q => {
+							return q.id === questionId;
+						});
+						this.question = allQuestions[qInd];
+						if (this.question && this.question.id === allQuestions[allQuestions.length - 1]?.id) {
+							this.isLastQuestion = true;
+						} else {
+							this.isLastQuestion = false;
+						}
+						this.questionLoaded = true;
+					}
+				);
+				/* var allQuestions = this.questionsService.allQuestions;
 				allQuestions.forEach((element: Question) => {
 					if (element.id === questionId) {
 						this.question = element;
@@ -80,7 +103,7 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 				} else {
 					this.isLastQuestion = false;
 				}
-				this.questionLoaded = true;
+				this.questionLoaded = true; */
 			}
 		);
 		this.router.events.subscribe((event: Event) => {
@@ -91,29 +114,22 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 	}
 
 	updateAnswer(inputType: string, questionId: number, optionId: number, answer: string): void {
-		var allQuestions = this.questionsService.allQuestions;
-		allQuestions.forEach((question: Question, index) => {
-			if (question && (question.id === questionId) && question.options) {
-				let questionUpdated = {...question};
-				this.store.dispatch(questionActions.updateAnswer({ questionIndex: index, question: { ...question } }));
-				if (inputType === "text") {
-					//question?.options ? question.options[optionId].answer = answer : "";
-					questionUpdated.options[0].answer = answer;
-					//this.store.dispatch(questionActions.updateAnswer({questionIndex: index, question: {...question}}));
-					this.store.dispatch(questionActions.updateAnswer({ questionIndex: index, question: questionUpdated }));
-				} else {
-					for (let j = 0; j < question.options.length; j++) {
-						const option = question.options[j];
-						this.store.dispatch(questionActions.updateAnswer({ questionIndex: index, question: { ...question } }));
-						if (option.id === optionId) {
-							//option.isSelected = !option.isSelected;
-						} else if (inputType === "radio") {
-							//option.isSelected = false;
-						}
-					}
+		// let allQuestions = this.questionsService.allQuestions;
+
+		if (inputType === "text") {
+			this.question.options[0].answer = answer;
+			this.store.dispatch(questionActions.updateAnswer({ question: cloneDeep(this.question) }));
+		} else {
+			for (let j = 0; j < this.question.options.length; j++) {
+				const option = this.question.options[j];
+				if (option.id === optionId) {
+					option.isSelected = !option.isSelected;
+				} else if (inputType === "radio") {
+					option.isSelected = false;
 				}
 			}
-		});
+			this.store.dispatch(questionActions.updateAnswer({ question: cloneDeep(this.question) }));
+		}
 	}
 
 	onGetNextOrPrevious(id: number, isNext: boolean) {
@@ -134,6 +150,7 @@ export class QuestionPanelComponent implements OnInit, OnDestroy {
 			this.questionsService.inReviewCount++;
 		}
 		question.reviewlater = !question.reviewlater;
+		this.store.dispatch(questionActions.updateAnswer({ question: cloneDeep(this.question) }));
 	}
 
 	onSubmit(): void {

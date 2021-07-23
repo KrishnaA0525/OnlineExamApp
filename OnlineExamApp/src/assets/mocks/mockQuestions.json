@@ -1,0 +1,82 @@
+[
+	{
+		"id": 1,
+		"questionText": "If the average of four consecutive odd numbers is 12, find the smallest of these numbers?",
+		"options": [5, 7, 9, 11],
+		"correctAnswer": 9,
+		"author": "Author1",
+		"stats": {
+			"lastAskedDate": "",
+			"askedCount": 10,
+			"crctAnsdPerc": 10
+		}
+	},
+	{
+		"id": 2,
+		"questionText": "There are two types of sugar. One is priced at Rs 62 per kg and the other is priced at Rs 72 per kg. If the two types are mixed together, the price of new mixture will be Rs 64.50 per kg. Find the ratio of the two types of sugar in this new mixture.",
+		"options": [
+			"2:5",
+			"3:1",
+			"6:7",
+			"3:2"
+		],
+		"correctAnswer": "3:1",
+		"author": "Author2",
+		"stats": {
+			"lastAskedDate": "",
+			"askedCount": 20,
+			"crctAnsdPerc": 20
+		}
+	},
+	{
+		"id": 3,
+		"questionText": "Today is Monday. After 61 days, it will be:",
+		"options": [
+			"Monday",
+			"Saturday",
+			"Sunday",
+			"Tuesday"
+		],
+		"correctAnswer": "Saturday",
+		"author": "Author3",
+		"stats": {
+			"lastAskedDate": "",
+			"askedCount": 30,
+			"crctAnsdPerc": 15
+		}
+	},
+	{
+		"id": 4,
+		"questionText": "Drugs and Alcohol ____ together to increase the risk of cancer in both men and women.",
+		"options": [
+			"act",
+			"acting",
+			"acts",
+			"acted"
+		],
+		"correctAnswer": "act",
+		"author": "Author4",
+		"stats": {
+			"lastAskedDate": "",
+			"askedCount": 40,
+			"crctAnsdPerc": 25
+		}
+	},
+	{
+		"id": 5,
+		"questionText": "In his first public speech, the newly elected defence minister said that leaks in defence matters could potentially ____ military operations.",
+		"options": [
+			"jeopardise",
+			"jiopardize",
+			"jeopardiece",
+			"jeopardize"
+		],
+		"correctAnswer": "jeopardize",
+		"author": "Author5",
+		"stats": {
+			"lastAskedDate": "",
+			"askedCount": 60,
+			"crctAnsdPerc": 12
+		}
+	}
+]

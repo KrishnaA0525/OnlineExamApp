@@ -1,4 +1,4 @@
-import { Action, createAction, props } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 
 import { Question } from "src/app/model/question";
 
@@ -15,4 +15,4 @@ const UPDATE_ANSWER = "UPDATE_ANSWER";
 } */
 
 export const initializeQuestions = createAction(INIT_QUESTIONS, props<{questions: Question[]}>());
-export const updateAnswer = createAction(UPDATE_ANSWER, props<{ questionIndex: number, question: Question }>());
+export const updateAnswer = createAction(UPDATE_ANSWER, props<{ question: Question }>());

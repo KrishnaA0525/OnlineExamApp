@@ -1,15 +1,16 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { Answer } from "src/app/model/answer";
 import { Question } from "src/app/model/question";
 
 import * as QuestionsActions from "./questions.actions"
 
 export interface State {
-	questions: Question[]
+	questions: Question[],
+	abc: number
 }
 
 const initialState: State = {
-	questions: []
+	questions: [],
+	abc: 0
 };
 
 /* export function questionsReducer(state: State = initialState, action: Action) {
@@ -33,13 +34,16 @@ const questionsReducer = createReducer(
 		};
 	}),
 	on(QuestionsActions.updateAnswer, (state, payload) => {
-		const question = state.questions[payload.questionIndex];
+		const questionIndex = state.questions.findIndex(q => {
+			return q.id === payload.question.id;
+		});
+		const question = state.questions[questionIndex];
 		const updatedQuestion = {
 			...question,
 			...payload.question
 		};
 		const updatedQuestions = [...state.questions];
-		updatedQuestions[payload.questionIndex] = updatedQuestion;
+		updatedQuestions[questionIndex] = updatedQuestion;
 		return {
 			...state,
 			questions: updatedQuestions
